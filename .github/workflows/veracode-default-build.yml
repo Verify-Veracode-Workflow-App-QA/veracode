@@ -36,24 +36,15 @@ jobs:
         VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
         VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
       run: |
-        RUN sudo apt update -y && \
-            sudo apt install -y \
-            curl
         cd veracode-helper/helper/cli
-        curl -sSO https://tools.veracode.com/veracode-cli/veracode-cli_2.23.0_linux_x86.tar.gz
-        tar -zxvf veracode-cli_2.23.0_linux_x86.tar.gz
-        export PATH="veracode-helper/helper/cli/ veracode-cli_2.23.0_linux_x86:$PATH"
+        cliFile=$(ls -1 . | head -n 1)
+        cliFileName=$(echo "$cliFile" | cut -c 1-$((${#cliFile}-7)))
+        tar -zxvf $cliFile
+        cd $cliFileName
+        export PATH="veracode-helper/helper/cli/$cliFileName:$PATH"
         cd /__w/veracode/veracode
         veracode package --source . --output veracode-artifacts --trust --debug
         zip veracode-artifact.zip veracode-artifacts/* -x .zip .tar .tar.gz .gz
-        # # cliFile=$(ls -1 . | head -n 1)
-        # # cliFileName=$(echo "$cliFile" | cut -c 1-$((${#cliFile}-7)))
-        # # tar -zxvf $cliFile
-        # cd $cliFileName
-        # export PATH="veracode-helper/helper/cli/$cliFileName:$PATH"
-        # cd /__w/veracode/veracode
-        # veracode package --source . --output veracode-artifacts --trust --debug
-        # zip veracode-artifact.zip veracode-artifacts/* -x .zip .tar .tar.gz .gz
 
     - name: Package error
       if: failure() && steps.application_package.outcome == 'failure'

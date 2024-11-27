@@ -49,6 +49,12 @@ jobs:
         ref: ${{ inputs.ref }}
         token: ${{ inputs.token }}
 
+    - name: path modification
+      run: |
+        pwd
+        ls -a
+        mv veracode-helper ../
+
     - name: Package the application
       id: application_package
       shell: bash
@@ -63,9 +69,9 @@ jobs:
           echo "No Pre-Build Dependency provided."
         fi
         if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
-          source /etc/profile.d/rvm.sh
-          rvm pkg install openssl
-          rvm install ruby-${{ inputs.ruby_version }}
+          # source /etc/profile.d/rvm.sh
+          # rvm pkg install openssl
+          # rvm install ruby-${{ inputs.ruby_version }}
         fi
         working_path=`pwd`
         echo "working_dir=$working_path" >> "$GITHUB_OUTPUT"

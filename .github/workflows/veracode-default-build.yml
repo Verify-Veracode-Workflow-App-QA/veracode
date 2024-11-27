@@ -63,9 +63,9 @@ jobs:
           echo "No Pre-Build Dependency provided."
         fi
         if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
-          source /etc/profile.d/rvm.sh
-          rvm pkg install openssl
-          rvm install ruby-${{ inputs.ruby_version }}
+          # source /etc/profile.d/rvm.sh
+          # rvm pkg install openssl
+          # rvm install ruby-${{ inputs.ruby_version }}
         fi
         working_path=`pwd`
         echo "working_dir=$working_path" >> "$GITHUB_OUTPUT"
@@ -78,10 +78,15 @@ jobs:
         export PATH="veracode-helper/helper/cli/$cliFileName:$PATH"
         cd $working_path
         if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
-          gem install bundler -v ${{ inputs.bundle_version }}
-          gem install veracode
-          bundle install
+          # gem install bundler -v ${{ inputs.bundle_version }}
+          # gem install veracode
+          # bundle install
         fi
+        pwd
+        ls -a
+        cd ..
+        ls -a
+        pwd
         ../veracode-helper/veracode package --source . --output veracode-artifacts --trust
 
     - name: Package error

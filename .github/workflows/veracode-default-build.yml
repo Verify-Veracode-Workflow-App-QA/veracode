@@ -78,9 +78,9 @@ jobs:
         export PATH="veracode-helper/helper/cli/$cliFileName:$PATH"
         cd $working_path
         if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
+          gem install --install-dir source-code veracode
           cd source-code
           gem install bundler -v ${{ inputs.bundle_version }}
-          gem install veracode
           bundle install
           cd ..
         fi

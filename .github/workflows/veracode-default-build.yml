@@ -53,6 +53,9 @@ jobs:
       run: |
         pwd
         ls -a
+        cd ../veracode-helper/helper/cli
+        pwd
+        ls -a
         mv veracode-helper ../
 
     - name: Package the application

@@ -48,6 +48,7 @@ jobs:
         repository: ${{ inputs.repository }}
         ref: ${{ inputs.ref }}
         token: ${{ inputs.token }}
+        path: 'source-code'
 
     - name: Package the application
       id: application_package
@@ -71,8 +72,7 @@ jobs:
         echo "working_dir=$working_path" >> "$GITHUB_OUTPUT"
         ls
         pwd
-        mv veracode-helper ../
-        cd ../veracode-helper/helper/cli
+        cd veracode-helper/helper/cli
         cliFile=$(ls -1 . | head -n 1)
         cliFileName=$(echo "$cliFile" | cut -c 1-$((${#cliFile}-7)))
         tar -zxvf $cliFile
@@ -80,11 +80,13 @@ jobs:
         export PATH="veracode-helper/helper/cli/$cliFileName:$PATH"
         cd $working_path
         if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
-          gem install veracode
+          gem install --install-dir source-code veracode
+          cd source-code
           gem install bundler -v ${{ inputs.bundle_version }}
           bundle install
+          cd ..
         fi
-        veracode package --source . --output veracode-artifacts --trust --debug
+        veracode package --source source-code --output veracode-artifacts --trust --debug
 
     - name: Package error
       if: failure() && steps.application_package.outcome == 'failure'

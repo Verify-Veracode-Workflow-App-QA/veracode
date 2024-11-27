@@ -69,7 +69,7 @@ jobs:
         fi
         working_path=`pwd`
         echo "working_dir=$working_path" >> "$GITHUB_OUTPUT"
-        ls
+        ls -a
         pwd
         mv veracode-helper ../
         cd ../veracode-helper/helper/cli

@@ -41,22 +41,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        path: 'veracode-helper'
-
-    - uses: actions/checkout@v4
-      with:
         repository: ${{ inputs.repository }}
         ref: ${{ inputs.ref }}
         token: ${{ inputs.token }}
+
+    - uses: actions/checkout@v4
+      with:
+        path: 'veracode-helper'
 
     - name: path modification
       run: |
         pwd
         ls -a
-        cd veracode-helper/helper/cli
         pwd
-        ls -a
         mv veracode-helper ../
+        ls -a ../
 
     - name: Package the application
       id: application_package

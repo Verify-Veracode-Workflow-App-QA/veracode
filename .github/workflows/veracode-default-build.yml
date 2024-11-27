@@ -53,7 +53,7 @@ jobs:
       run: |
         pwd
         ls -a
-        cd ../veracode-helper/helper/cli
+        cd veracode-helper/helper/cli
         pwd
         ls -a
         mv veracode-helper ../

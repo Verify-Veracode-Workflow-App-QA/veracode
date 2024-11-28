@@ -82,7 +82,7 @@ jobs:
           # gem install veracode
           # bundle install
         #fi
-        ../veracode-helper/helper/cli/veracode package --source . --output veracode-artifacts --trust
+        ../veracode-helper/helper/cli/$cliFileName/veracode package --source . --output veracode-artifacts --trust
 
     - name: Package error
       if: failure() && steps.application_package.outcome == 'failure'

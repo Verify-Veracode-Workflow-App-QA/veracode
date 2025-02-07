@@ -1,4 +1,4 @@
-<img src="imgs/vclogo.png" width="20%">
+<img src="imgs/vclogo.png" width="50%">
 
 # Veracode GitHub Workflow Integration 
 

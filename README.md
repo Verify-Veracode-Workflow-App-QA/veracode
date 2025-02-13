@@ -1,5 +1,7 @@
-<img src="imgs/vclogo-light-mode.png#gh-light-mode-only" width="50%">
-<img src="imgs/vclogo-dark-mode.png#gh-dark-mode-only" width="50%">
+<picture>
+  <source srcset="imgs/vclogo-light-mode.png" media="(prefers-color-scheme: light)">
+  <source srcset="imgs/vclogo-dark-mode.png" media="(prefers-color-scheme: dark)">
+</picture>
 
 # Veracode GitHub Workflow Integration 
 

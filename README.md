@@ -1,6 +1,6 @@
 <picture>
-  <source srcset="imgs/vclogo-light-mode.png" media="(prefers-color-scheme: light)">
-  <source srcset="imgs/vclogo-dark-mode.png" media="(prefers-color-scheme: dark)">
+  <source srcset="imgs/vclogo-light-mode.png">
+  <source srcset="imgs/vclogo-dark-mode.png">
 </picture>
 
 # Veracode GitHub Workflow Integration 
